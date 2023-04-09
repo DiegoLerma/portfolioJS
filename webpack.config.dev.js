@@ -13,6 +13,7 @@ module.exports = { // Exportamos un objeto con la configuración de Webpack
         // Un hash es un número que se genera a partir de un string, este número es único y se utiliza para identificar de forma única a un archivo
     },
     mode: 'development', // Mode permite establecer el modo de Webpack, en este caso estamos en modo desarrollo
+    watch: true, // Watch permite establecer si Webpack va a estar observando los cambios en los archivos para volver a generar el código
     resolve: { // Resolve permite establecer las extensiones que va a leer Webpack
         extensions: ['.js'], // En este caso solo vamos a leer archivos con extensión .js
         alias: { // Alias permite establecer alias para rutas
