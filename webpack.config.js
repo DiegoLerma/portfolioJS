@@ -4,6 +4,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // Plugin para 
 const CopyPlugin = require('copy-webpack-plugin'); // Plugin para copiar archivos y carpetas
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin'); // Plugin para minimizar CSS
 const TerserPlugin = require('terser-webpack-plugin'); // Plugin para minimizar JS
+const Dotenv = require('dotenv-webpack'); // Plugin para establecer variables de entorno
+// const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // Plugin para limpiar la carpeta dist
 
 module.exports = { // Exportamos un objeto con la configuración de Webpack
     entry: './src/index.js', // Entry es el punto de entrada de nuestra aplicación
@@ -12,6 +14,7 @@ module.exports = { // Exportamos un objeto con la configuración de Webpack
         filename: '[name].[contenthash].js', // Filename es el nombre del archivo que se va a generar
         assetModuleFilename: 'assets/images/[hash][ext][query]', // AssetModuleFilename permite establecer el nombre del archivo que se va a generar, en este caso se va a generar un hash con la extensión del archivo original
         // Un hash es un número que se genera a partir de un string, este número es único y se utiliza para identificar de forma única a un archivo
+        clean: true, // Clean permite establecer si se va a limpiar la carpeta dist antes de generar el código
     },
     resolve: { // Resolve permite establecer las extensiones que va a leer Webpack
         extensions: ['.js'], // En este caso solo vamos a leer archivos con extensión .js
@@ -76,7 +79,10 @@ module.exports = { // Exportamos un objeto con la configuración de Webpack
                     to: "assets/images" // To es la ruta de destino de los archivos
                 }
                     ]
-})
+        }),
+        new Dotenv(), // Este plugin permite establecer variables de entorno
+        // new CleanWebpackPlugin(), // Este plugin permite limpiar la carpeta dist
+
     ],
     optimization: { // Optimization permite establecer opciones de optimización
         minimize: true, // Minimize permite establecer si se va a minimizar el código
